@@ -10,6 +10,10 @@ source cloudtrians-blog-env/bin/activate
 
 pip install django
 
+pip install werkzeug //mandatory for django-extensions
+pip install django-extensions
+
+
 ##### Check version of django
 ##### -------------------------------------------
 import django.get_version()
@@ -28,3 +32,8 @@ Check the SQL which django to apply when migrating schema to database
 python manage.py sqlmigrate blog 0001
 
 python manage.py migrate
+
+
+
+# Creating a superuser
+python manage.py createsuperuser
