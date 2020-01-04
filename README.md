@@ -1,4 +1,36 @@
- ## Cloud Train Blog - Shri Ganeshay Namah
+# Performance Improvement
+https://instagram-engineering.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172
+https://code.kiwi.com/memory-efficiency-of-parallel-io-operations-in-python-6e7d6c51905d
+https://engineering.upside.com/a-beginners-guide-to-optimizing-pandas-code-for-speed-c09ef2c6a4d6
+https://www.freecodecamp.org/news/an-a-z-of-useful-python-tricks-b467524ee747/
+https://www.freecodecamp.org/news/how-to-visualize-the-central-limit-theorem-in-python-b619f5b00168/
+gevent 
+threadpoolexecutor
+
+##### Great
+----------------------------------
+pip install emoji
+
+print(emojize(":thumbs_up:"))
+
+pip install geopy
+
+pip install howdoi
+
+pip install typing
+
+pip install pyyaml
+
+
+to make jsonapi:  
+marshmallow_jsonapi
+
+
+You want to plot graphs in the console?
+pip install bashplotlib
+from collections import OrderedDict, Counter
+
+# Cloud Train Blog - Shri Ganeshay Namah
 # ------------------------------------------
 ##### Setup Instructions
 ##### --------------------------------------
@@ -172,3 +204,40 @@ templates/
                  list.html
                  detail.html
 ```
+
+# Type checking in Python
+
+```python
+
+from typing import Dict , list
+fullname:Dict[str, int] =  {"name": "Sudeep", "lastName":"Patel"}
+
+ def fun(a:int) -> int:
+     return a
+from typing import Tuple
+
+my_data: Tuple[str, int, float] = ("Adam", 10, 5.7)
+from typing import List, Tuple
+```
+
+### Creating Alias to complex type
+
+```python
+LatLngVector = List[Tuple[float, float]]
+
+points: LatLngVector = [
+    (25.91375, -60.15503),
+    (-11.01983, -166.48477),
+    (-11.01983, -166.48477)
+]
+
+ ```
+##### Running the Type Checker
+pip install mypy
+
+mypy test.py
+
+
+# For Peformance analysis
+sudo apt install linux-tools
+sudo apt install linux-tools-generic
