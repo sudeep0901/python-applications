@@ -237,6 +237,8 @@ pip install mypy
 
 mypy test.py
 
+# Using Class Based View
+
 
 # For Peformance analysis
 sudo apt install linux-tools

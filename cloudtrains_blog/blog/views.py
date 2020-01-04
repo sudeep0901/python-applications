@@ -1,10 +1,22 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from django.views.generic import ListView
 
 
-# Create your views here.
+# Creating class based views
 
+
+class PostListView(ListView):
+    queryset = Post.published.all()
+    # can also use instead of above
+    # model = Post
+    context_object_name = 'posts'
+    paginate_by = 3
+    template_name = 'blog/post/list.html'
+
+
+# Create your views here. function based views
 
 def post_list(request):
     posts = Post.published.all()
