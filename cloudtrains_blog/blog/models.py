@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-
+from taggit.managers import TaggableManager
 
 # Create Custom Model Manager
 
@@ -15,13 +15,13 @@ class PublishedManager(models.Manager):
 
 
 class Post(models.Model):
+    tag = TaggableManager()
     objects = models.Manager()  # default Manager
     published = PublishedManager()  # Custom Manager
 
     # Canonical url
 
     def get_absolute_url(self):
-
         return reverse('blog:post_detail',
                        args=[self.publish.year,
                              self.publish.month,
@@ -56,3 +56,22 @@ class Post(models.Model):
         self.delete_on = timezone.now()
         self.deleted = True
         self.save()
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {} on  {}'.format(self.name, self.post)
+
+

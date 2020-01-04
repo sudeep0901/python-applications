@@ -266,3 +266,37 @@ EMAIL_HOST_PASSWORD Whether to use a TLS secure connection
 EMAIL_USE_TLS Whether to use an implicit TLS secure in case SMTP server not available
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 **_send_mail('Django Mail', 'This is a test email','@gmail.com', ['@gmail.com'], fail_silently=False)_**
+
+
+# Adding the Tagging Functionality
+
+pip install django_taggit==0.22.2
+
+```python
+INSTALLED_APPS = [
+# ...
+'blog.apps.BlogConfig',
+'taggit',
+]
+
+# add taggit in models.py
+
+from taggit.managers import TaggableManager
+class Post(models.Model):
+# ...
+tags = TaggableManager()
+
+_# use below in shell to add tag to blog_
+from blog.models import Post                                                                                                                  
+
+post = Post.objects.get(id=1)                                                                                                                 
+post.tag.add('spritiual', 'social', 'indian')                                                                                                 
+post.tag.all()                                                                                                                                
+
+```
+python manage.py runserver_plus --print-sql
+
+
+
+
+
