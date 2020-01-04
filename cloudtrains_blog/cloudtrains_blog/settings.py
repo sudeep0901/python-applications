@@ -126,3 +126,19 @@ STATICFILES_DIRS = (
 )
 print(BASE_DIR)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '8999'
+
+
+# EMAIL_HOST_USER
+# : Password for the SMTP server
+# EMAIL_HOST_PASSWORD
+# : Whether to use a TLS secure connection
+# EMAIL_USE_TLS
+# : Whether to use an implicit TLS secure
+
+# in case SMTP server not available Django prints message to console
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# send_mail('Django Mail', 'This is a test email','sudeep.tech.patel@gmail.com', ['sudeep.tech.patel@gmail.com'], fail_silently=False)

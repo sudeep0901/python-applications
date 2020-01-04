@@ -243,3 +243,26 @@ mypy test.py
 # For Peformance analysis
 sudo apt install linux-tools
 sudo apt install linux-tools-generic
+
+# Creating forms with Django
+
+Form : Allows you to build standard forms
+
+ModelForm: Allows you to build forms tied to model instances
+
+## Sending Email from Django
+
+
+from django.core.mail import send_mail
+send_mail('Django Mail', 'This is a test email','sudeep.tech.patel@gmail.com', ['sudeep.tech.patel@gmail.com'], fail_silently=False)
+
+
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '8999'
+
+EMAIL_HOST_USER: Password for the SMTP server
+EMAIL_HOST_PASSWORD Whether to use a TLS secure connection
+EMAIL_USE_TLS Whether to use an implicit TLS secure in case SMTP server not available
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+**_send_mail('Django Mail', 'This is a test email','@gmail.com', ['@gmail.com'], fail_silently=False)_**
