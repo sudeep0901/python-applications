@@ -329,3 +329,111 @@ def show_latest_posts(count):
 
 # Custom Filter
 pip install markdown
+```python
+from django import template
+from django.db.models import Count
+import markdown
+from django.utils.safestring import mark_safe
+
+from ..models import Post
+
+register = template.Library()
+
+
+# @register.simple_tag(name='my_tag')
+@register.simple_tag()
+def total_posts():
+    return Post.published.count()
+
+
+@register.inclusion_tag('blog/post/latest_posts.html')
+def show_latest_posts(count):
+    latest_posts = Post.published.order_by('-publish')[:count]
+    return {'latest_posts': latest_posts}
+
+
+@register.simple_tag
+def get_most_commented_posts(count=5):
+    return Post.published.annotate(total_comments=Count('comments')).order_by('-total_comments')[:count]
+
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text))
+
+```
+
+# Adding a sitemap
+Django comes with a sitemap framework, which allows you to
+generate sitemaps for your site dynamically. A sitemap is an XML
+file that tells search engines the pages of your website, their
+relevance, and how frequently they are updated. Using a sitemap,
+you will help crawlers that index your website's content.
+
+```python
+SITE_ID = 1
+# Application definition
+INSTALLED_APPS = [
+# ...
+'django.contrib.sites',
+'django.contrib.sitemaps',
+]
+
+# sitemap.py
+from django.contrib.sitemaps import Sitemap
+from .models import Post
+
+
+class PostSiteMap(Sitemap):
+    changefreq = 'weekly'
+    priority = 0.9
+
+    def items(self):
+        return Post.published.all()
+
+    def lastmod(self, obj):
+        return obj.updated
+
+
+# in project Url.py 
+
+"""cloudtrains_blog URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+
+# re_path()
+from django.contrib.sitemaps.views import sitemap
+# from .blog import sitemaps
+from blog.sitemap import PostSiteMap
+
+sitemaps = {
+    'posts': PostSiteMap
+}
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # path('login/', auth_views.LoginView),
+    path('blog/', include('blog.urls', namespace='blog')),
+    # path(r'', include('django_blog_it.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+    name='django.contrib.sitemaps.views.sitemap')
+
+]
+
+# http://localhost:8000/sitemap.xml
+http://127.0.0.1:8000/admin/sites/site/
+```
