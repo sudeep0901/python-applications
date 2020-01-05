@@ -18,10 +18,19 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
 # re_path()
+from django.contrib.sitemaps.views import sitemap
+# from .blog import sitemaps
+from blog.sitemap import PostSiteMap
 
+sitemaps = {
+    'posts': PostSiteMap
+}
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', auth_views.LoginView),
     path('blog/', include('blog.urls', namespace='blog')),
     # path(r'', include('django_blog_it.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+    name='django.contrib.sitemaps.views.sitemap')
+
 ]
