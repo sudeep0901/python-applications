@@ -437,3 +437,41 @@ urlpatterns = [
 # http://localhost:8000/sitemap.xml
 http://127.0.0.1:8000/admin/sites/site/
 ```
+
+# Full-Text Search for Site
+
+pip install psycopg2
+```python
+DATABASES = {
+    'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blog',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',  # the missing piece of the puzzle
+        # 'PORT': '',  # optional, I don't need this since I'm using the standard port
+    },
+
+INSTALLED_APPS = [
+# ...
+'django.contrib.postgres',
+]
+```
+python manage.py migrate
+
+python manage.py createsuperuser
+```python
+
+from django.contrib.postgres.search import SearchVector
+Post.objects.annotate(search=SearchVector('title', 'body'),).filter(search='django')
+
+```
+Other full-text search engines
+You may want to use a full-text search engine different from
+PostgreSQL. If you want to use Solr or Elasticsearch, you can
+integrate them into your Django project using Haystack. Haystack
+is a Django application that works as an abstraction layer for
+multiple search engines. It offers a simple search API very similar to
+Django QuerySets. You can fi
