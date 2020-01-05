@@ -21,6 +21,7 @@ pip install typing
 
 pip install pyyaml
 
+pip install django-blog-it
 
 to make jsonapi:  
 marshmallow_jsonapi
@@ -297,6 +298,32 @@ post.tag.all()
 python manage.py runserver_plus --print-sql
 
 
+# Create Custom TAGS
+```python
+from django import template
+from ..models import Post
 
+register = template.Library()
 
+@register.simple_tag
+def total_posts():
+    return Post.published.count()
+
+# inclusion tag support context to be passed
+
+@register.inclusion_tag('blog/post/latest_posts.html')
+def show_latest_posts(count):
+    latest_posts = Post.published.order_by('-publish')[:count]
+    return {'latest_posts': latest_posts}
+```
+```djangotemplate
+{% load blog_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+```
 
