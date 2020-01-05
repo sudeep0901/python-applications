@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'd_a=g_^@5do(5fhgsd#j-8*h30wh$_(4@sj23l_w_t5ddas77i'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,6 +38,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'django_extensions',
     'taggit',
+    'simple_pagination',
+    'django_blog_it',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cloudtrains_blog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -82,7 +81,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -102,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -115,7 +112,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -131,7 +127,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '8999'
 
-
 # EMAIL_HOST_USER
 # : Password for the SMTP server
 # EMAIL_HOST_PASSWORD
@@ -143,3 +138,9 @@ EMAIL_PORT = '8999'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # send_mail('Django Mail', 'This is a test email','sudeep.tech.patel@gmail.com', ['sudeep.tech.patel@gmail.com'], fail_silently=False)
+
+# PACKAGE_DIRS = '/home/sudeep/.local/lib/python3.7/site-packages/'
+# TEMPLATE_DIRS = (
+#     os.path.join(PACKAGE_DIRS, 'django_blog_it/django_blog_it/templates/dashboard/'),
+# )
+# print(os.path.join(PACKAGE_DIRS, 'django_blog_it/django_blog_it/templates/dashboard/'))

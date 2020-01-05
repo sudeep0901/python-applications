@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', auth_views.LoginView),
     path('blog/', include('blog.urls', namespace='blog')),
+    # path(r'', include('django_blog_it.urls')),
 ]
