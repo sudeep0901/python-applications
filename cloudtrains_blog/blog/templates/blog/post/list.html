@@ -1,11 +1,12 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% block title %}My Blog{% endblock %}
 
 {% block content %}
     {#    <h1>My Blog</h1>#}
     {% if tag %}
-            <h2>Posts tagged with "{{ tag.name }}"</h2>
-        {% endif %}
+        <h2>Posts tagged with "{{ tag.name }}"</h2>
+    {% endif %}
 
     {% for post in posts %}
 
@@ -29,8 +30,10 @@
         <p class="date">
             Published {{ post.publish }} by {{ post.author }}
         </p>
+{#        Comment below line and changed filter to custom filter markdown#}
+{#        {{ post.body | truncatewords:30|linebreaks }}#}
+        {{ post.body | markdown| truncatewords_html:30}}
 
-        {{ post.body | truncatewords:30|linebreaks }}
 
     {% endfor %}
     {#    function based view url#}
