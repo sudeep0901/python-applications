@@ -475,3 +475,11 @@ integrate them into your Django project using Haystack. Haystack
 is a Django application that works as an abstraction layer for
 multiple search engines. It offers a simple search API very similar to
 Django QuerySets. You can fi
+
+
+# Authentication in DJANGO
+A middleware is a class with methods that are globally executed
+during the request or response phase. 
+
+
+

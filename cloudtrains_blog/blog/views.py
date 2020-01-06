@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
@@ -14,7 +15,7 @@ from django.db.models import Count
 
 # Creating class based views
 
-
+@login_required
 class PostListView(ListView):
     queryset = Post.published.all()
     # can also use instead of above
@@ -26,6 +27,7 @@ class PostListView(ListView):
 
 # Create your views here. function based views
 
+@login_required
 def post_list(request, tag_slug=None):
     posts = Post.published.all()
 
@@ -92,6 +94,7 @@ def post_detail(request, year, month, day, post):
 
 # sharing post via email
 
+@login_required
 def post_share(request, post_id):
     # retrive post by id
     post = get_object_or_404(Post, id=post_id, status='published')

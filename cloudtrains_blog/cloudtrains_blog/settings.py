@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # 'django_blog_it',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'bootstrap4',
+    # 'bootstrap4',
+    'account.apps.AccountConfig',
 
 ]
 
@@ -157,3 +158,8 @@ EMAIL_PORT = '8999'
 #     os.path.join(PACKAGE_DIRS, 'django_blog_it/django_blog_it/templates/dashboard/'),
 # )
 # print(os.path.join(PACKAGE_DIRS, 'django_blog_it/django_blog_it/templates/dashboard/'))
+
+
+LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_URL = '/  account/login/'
+LOGOUT_URL = '/account/logout/'

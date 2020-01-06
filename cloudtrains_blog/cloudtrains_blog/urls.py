@@ -28,11 +28,12 @@ sitemaps = {
 }
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('account/', include('account.urls')),
     # path('login/', auth_views.LoginView),
     path('blog/', include('blog.urls', namespace='blog')),
     # path(r'', include('django_blog_it.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-    name='django.contrib.sitemaps.views.sitemap'),
+         name='django.contrib.sitemaps.views.sitemap'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
 
 ]
