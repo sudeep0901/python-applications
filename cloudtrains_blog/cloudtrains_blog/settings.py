@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 'django_blog_it',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'bootstrap4',
 
 ]
 

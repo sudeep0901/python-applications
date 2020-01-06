@@ -1,13 +1,17 @@
 {% load static %}
 {% load blog_tags %}
-
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
     <link href="{% static 'css/blog.css' %}" rel=stylesheet>
+
 
 </head>
 <body>
@@ -43,11 +47,11 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
-{#            <form action="." class="form-inline my-2 my-lg-0" method="get">#}
-{#                {{ form.as_p }}#}
-{#                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-{#            </form>#}
+            {#            <form action="." class="form-inline my-2 my-lg-0" method="get">#}
+            {#                {{ form.as_p }}#}
+            {#                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+            {#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+            {#            </form>#}
 
 
         </div>
